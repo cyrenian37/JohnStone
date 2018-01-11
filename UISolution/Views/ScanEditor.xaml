@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="SunSeven.Views.ScanEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:localModel="clr-namespace:SunSeven.Models"
+                   xmlns:localDataSource="clr-namespace:SunSeven.DataSource"
+             xmlns:local="clr-namespace:SunSeven.Views"
+             mc:Ignorable="d" Unloaded="UserControl_Unloaded"
+             d:DesignHeight="500" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <localDataSource:JSDataContext x:Key="viewModelDataContext"/>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+
+    <Grid  Background="LightGray">
+
+        <StackPanel Orientation="Vertical" Margin="50,20,50,50" Width="700" >
+
+        <StackPanel HorizontalAlignment="Right"  Orientation="Horizontal"  Margin="0,0,0,10">
+            <!--<TextBox Name="txtInvoiceNo" Width="150" TextAlignment="Right" Margin="2" Height="30" FontSize="19" Padding="0,0,5,0" ></TextBox>-->
+                <telerik:RadMaskedTextInput Name="txtInvoiceNo" EmptyContent="Enter Invoice No"  Mask=""
+                                            Width="200" Margin="2" Height="30" FontSize="19" Padding="0,0,5,0" />
+                <Button Width="100" Margin="5,2,2,2" Height="30" Click="Button_Click" FontWeight="Bold" >Manual Scan</Button>
+                <Button Width="60" Margin="5,2,2,2" Height="30" Click="Clear_Click" FontWeight="Bold" >Clear</Button>
+            </StackPanel>
+       
+        
+       <telerik:RadGridView x:Name="RadGridView1" FontSize="14" Width="700" 
+                            GroupRenderMode="Flat" telerik:StyleManager.Theme="Office_Silver"                          
+							 ClipboardCopyMode="All"
+							 ClipboardPasteMode="Default"
+							 SelectionMode="Extended" 		
+                             ShowGroupPanel="False"
+							 ItemsSource="{Binding}"
+							 CanUserFreezeColumns="False"
+							 RowIndicatorVisibility="Collapsed"
+							 AutoGenerateColumns="False"    
+                             RowEditEnded="RadGridView1_RowEditEnded">
+
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu x:Name="GridContextMenu" ItemClick="GridContextMenu_ItemClick">
+                        <telerik:RadContextMenu.Items>
+                            <!--<telerik:RadMenuItem Header="Add" />-->
+                            <telerik:RadMenuItem Header="Edit" />
+                            <!--<telerik:RadMenuItem Header="Delete" />-->
+                        </telerik:RadContextMenu.Items>
+                    </telerik:RadContextMenu>
+                </telerik:RadContextMenu.ContextMenu>
+           
+                <telerik:RadGridView.Columns>
+                
+                <telerik:GridViewDataColumn UniqueName="InvoiceNo" Header="Invoice No" DataMemberBinding="{Binding InvoiceNo}" Width="150"  IsReadOnly="True" IsFilterable="True" />
+
+                <telerik:GridViewDataColumn UniqueName="Delivery Date" Header="Delivery Date" DataMemberBinding="{Binding DeliveryDate ,StringFormat={}{0:dd-MMM-yyyy HH:mm:ss}}" Width="160"  IsReadOnly="True" IsFilterable="False" />
+
+                    <telerik:GridViewDataColumn UniqueName="Description" Header="Internal Comment" DataMemberBinding="{Binding Description}" Width="*"  IsReadOnly="False"
+                                                IsFilterable="False"  />
+
+                <telerik:GridViewComboBoxColumn DataMemberBinding="{Binding Status, Mode=TwoWay}" Width="150" Header="Status"
+												ItemsSource="{Binding SalesStatus, Source={StaticResource viewModelDataContext}}"
+                                                DisplayMemberPath="Name"
+												SelectedValueMemberPath="Id" IsFilterable="False" >
+
+                </telerik:GridViewComboBoxColumn>
+                
+                <!--<telerik:GridViewColumn UniqueName="Edit" IsVisible="True" Width="80">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Style="{StaticResource RadButtonStlye}" 
+                                                                   Command="{Binding printCommand}" CommandParameter="{Binding}"
+                                                                   Content="Edit" />
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>-->
+
+
+            </telerik:RadGridView.Columns>
+
+            </telerik:RadGridView>
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

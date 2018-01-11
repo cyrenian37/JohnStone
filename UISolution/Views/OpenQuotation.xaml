@@ -1,0 +1,76 @@
+﻿<telerik:RadWindow x:Class="SunSeven.Views.OpenQuotation"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:localModel="clr-namespace:SunSeven.Models"
+                   telerik:StyleManager.Theme="Office_Silver"  
+                   Header="Open Quotation" Unloaded="RadWindow_Unloaded"
+                   Width="800" Height="600">
+    
+    <telerik:RadWindow.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+           
+        </ResourceDictionary>
+
+    </telerik:RadWindow.Resources>
+    <Grid>
+
+        <Border  BorderThickness="1"  BorderBrush="DarkGray" Background="LightGray" Margin="10" />
+
+
+        <StackPanel Margin="20">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10" >
+                <Image Source="/JohnStone;component/Images/Edit_Find.png" Height="15" Width="15" Margin="0,0,10,0" />
+                <TextBox  x:Name="textBoxFilterValue" Width="200" HorizontalAlignment="Right" VerticalContentAlignment="Center"
+                          Height="25" BorderThickness="1" BorderBrush="Black"/>
+            </StackPanel>
+            <telerik:RadGridView x:Name="RadGridView1" 
+                             GroupRenderMode="Flat"  telerik:StyleManager.Theme="Office_Silver"                         
+                             ClipboardCopyMode="All"
+                             ClipboardPasteMode="Default"
+                             SelectionMode="Extended"                            
+							 ColumnWidth="*" IsFilteringAllowed="False" IsReadOnly="True"
+							 ItemsSource="{Binding}"
+							 CanUserFreezeColumns="False"
+							 RowIndicatorVisibility="Collapsed"
+							 AutoGenerateColumns="False"							 
+							 ShowGroupPanel="False" 
+                             SelectionChanged="RadGridView1_SelectionChanged"
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   
+                             localModel:CustomFilterBehavior.TextBox="{Binding ElementName=textBoxFilterValue}">
+
+                <telerik:RadGridView.SortDescriptors>
+                    <telerik:SortDescriptor Member="SalesDate" SortDirection="Descending" />
+                </telerik:RadGridView.SortDescriptors>
+                
+                <telerik:RadGridView.Columns>                    
+                    <telerik:GridViewDataColumn Header="Sales Date" DataMemberBinding="{Binding SalesDate,StringFormat={}{0:dd-MMM-yyyy HH:mm:ss}}" Width="130"  />
+                    <telerik:GridViewDataColumn Header="Customer" DataMemberBinding="{Binding Customer.Name}" Width="250"/>
+                 
+                    <telerik:GridViewDataColumn Header="Description" DataMemberBinding="{Binding Description}" Width="*"/>
+                </telerik:RadGridView.Columns>
+
+            </telerik:RadGridView>
+
+            <telerik:RadDataPager telerik:StyleManager.Theme="Office_Silver"             
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+							  x:Name="radDataPager1"
+							  PageSize="16" FontSize="12" 
+							  BorderThickness="1,0,1,1"
+							  Source="{Binding Items, ElementName=RadGridView1}"
+							  DisplayMode="All"
+							  AutoEllipsisMode="Both"
+							  NumericButtonCount="10"
+							  IsTotalItemCountFixed="True"  />
+        </StackPanel>
+
+
+    </Grid>
+
+</telerik:RadWindow>

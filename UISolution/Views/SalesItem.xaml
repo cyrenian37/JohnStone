@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="SunSeven.Views.SalesItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:localVM="clr-namespace:SunSeven.ViewModels"          
+             xmlns:local="clr-namespace:SunSeven.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <localVM:vmSalesItem x:Key="viewModelSalesItem"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource viewModelSalesItem}">
+        <telerik:RadGridView Grid.Column="0" ShowGroupPanel="False" FontSize="16" 
+                             RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                             Name="gridSalesItem" telerik:StyleManager.Theme="Summer" 
+                             ItemsSource="{Binding SalesItems}" ColumnWidth="*"
+                             AutoGenerateColumns="False"                                                               
+                             NewRowPosition="Top"  >
+           
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}" Header="Id" Width="40" IsVisible="False"/>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding ProductId}" Header="Product" Width="100" IsVisible="False" />
+
+
+                <telerik:GridViewComboBoxColumn DataMemberBinding="{Binding ProductId, Mode=TwoWay}" Width="300" Header="Product"
+												ItemsSource="{Binding Products, Source={StaticResource viewModelSalesItem}}"                                                
+												SelectedValueMemberPath="Id" >
+                    <telerik:GridViewComboBoxColumn.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Category.Name}" FontWeight="Bold" Foreground="Green" />
+                                <TextBlock Text="{Binding Description}" Margin="5,0,0,0" Foreground="Brown" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:GridViewComboBoxColumn.ItemTemplate>
+
+                </telerik:GridViewComboBoxColumn>
+
+
+                <telerik:GridViewComboBoxColumn DataMemberBinding="{Binding PriceHistoryId}"  Width="300" Header="Price History"
+												ItemsSourceBinding="{Binding PriceHistoriesCollection}"
+												SelectedValueMemberPath="Id" >
+                    <telerik:GridViewComboBoxColumn.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" >                                
+                                
+                                <TextBlock Text="{Binding Product.Category.Name}" FontWeight="Bold" Foreground="Green" />
+                                <TextBlock Text="{Binding SellingUnit.Unit}" FontWeight="Bold" Foreground="IndianRed" Margin="5,0,0,0" />
+                                <TextBlock Text="{Binding Price,  ConverterCulture=en-IE, StringFormat={}{0:C}}" FontWeight="Bold" Margin="5,0,5,0"  />
+                                <TextBlock Text="{Binding AppliedOn, StringFormat={}{0:dd-MMM-yyyy HH:mm:ss} }" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:GridViewComboBoxColumn.ItemTemplate>
+
+                </telerik:GridViewComboBoxColumn>
+
+
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Quantity}" Header="Quantity" Width="100"  />
+                
+                <telerik:GridViewColumn Width="60">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Command="telerik:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                <telerik:RadButton.Content>
+                                    <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                </telerik:RadButton.Content>
+                            </telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+                
+            </telerik:RadGridView.Columns>
+            
+
+         
+
+        </telerik:RadGridView>
+
+
+    </Grid>
+</UserControl>

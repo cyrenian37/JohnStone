@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="SunSeven.Views.QuotationHistory"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                   xmlns:localModel="clr-namespace:SunSeven.Models"
+              Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1366">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+
+        <Border  BorderThickness="1"  BorderBrush="DarkGray" Background="LightGray" Margin="10" />
+
+
+        <StackPanel Margin="20">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*" />
+                    <ColumnDefinition Width="1*" />
+
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center"   >
+                    <Label>Start :</Label>
+                    <telerik:RadDateTimePicker  Height="25" Width="160" x:Name="dtPickerST" 
+                                                SelectedValue="{Binding StartDT, ConverterCulture=en-IE, StringFormat={}{0:dd-MMM-yy HH:mm}}" />
+
+                    <!--SelectedValue="{Binding DeliveryDate, ConverterCulture=en-IE, StringFormat={}{0:dd-MMM-yy HH:mm}}"  />-->
+                    <Label Margin="20,0,0,0">End :</Label>
+                    <telerik:RadDateTimePicker  Height="25" Width="160" x:Name="dtPickerET" 
+                                                SelectedValue="{Binding EndDT, ConverterCulture=en-IE, StringFormat={}{0:dd-MMM-yy HH:mm}}" />
+
+                    <!--<Button Margin="20,0,0,0" Width="100" Height="20" Background="White" Click="Button_Click"  >Search</Button>-->
+
+                    <Button Margin="20,0,0,0" Width="120" Height="25" Background="White" Command="{Binding searchCommand}" HorizontalContentAlignment="Left"  >
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Image Source="/JohnStone;component/Images/Edit_Find.png" Margin="10,0,15,0"   />
+                            <TextBlock Text="Search" FontWeight="Bold" VerticalAlignment="Bottom"  />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Margin="20,0,0,0" Width="120" Height="25" Background="White" Click="Button_Click" HorizontalContentAlignment="Left" >
+
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Image Source="/JohnStone;component/Images/Excel.png" Margin="0,0,5,0" HorizontalAlignment="Left"  />
+                            <TextBlock Text="Export to Excel" FontWeight="Bold" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Column="5">
+                    <Image Source="/JohnStone;component/Images/Edit_Find.png" Height="13" Width="13" Margin="0,0,10,0" />
+                    <TextBox  x:Name="textBoxFilterValue" Width="200" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+
+
+
+
+            <telerik:RadGridView x:Name="RadGridView1" Margin="0,20,0,0"
+                             GroupRenderMode="Flat"  telerik:StyleManager.Theme="Windows8"                         
+                             ClipboardCopyMode="All"
+                             ClipboardPasteMode="Default"
+                             SelectionMode="Single"                            
+							 ColumnWidth="*" IsFilteringAllowed="True"  
+							 ItemsSource="{Binding QuotationHistories}"
+							 CanUserFreezeColumns="False"
+							 RowIndicatorVisibility="Collapsed"
+							 AutoGenerateColumns="False"							 
+							 ShowGroupPanel="False" 
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   
+                             Deleting="RadGridView1_Deleting"
+                             localModel:CustomFilterBehavior.TextBox="{Binding ElementName=textBoxFilterValue}">
+
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu x:Name="GridContextMenu" ItemClick="GridContextMenu_ItemClick">
+                        <telerik:RadContextMenu.Items>
+                            <telerik:RadMenuItem Header="Edit" />
+                            <!--<telerik:RadMenuItem Header="Delete" />-->
+                        </telerik:RadContextMenu.Items>
+                    </telerik:RadContextMenu>
+                </telerik:RadContextMenu.ContextMenu>
+                
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Header="Master" DataMemberBinding="{Binding Master}" Width="80" IsFilterable="True"   />
+                    <telerik:GridViewDataColumn Header="Sales Date" DataMemberBinding="{Binding SalesDate,StringFormat={}{0:dd-MMM-yyyy HH:mm:ss}}" Width="150" IsFilterable="False"   />
+                    
+                    <telerik:GridViewDataColumn Header="Customer" DataMemberBinding="{Binding CustomerDetail }" Width="250" IsFilterable="True" />
+
+                    <telerik:GridViewDataColumn Header="Sales Person"	DataMemberBinding="{Binding SalesPerson}" Width="200"  IsFilterable="True" />
+
+                    <telerik:GridViewDataColumn Header="Description"  DataMemberBinding="{Binding Description}" Width="*" IsFilterable="False" />
+
+                    <telerik:GridViewDataColumn Header="VAT"  DataMemberBinding="{Binding TotalVAT}" DataFormatString="{}{0:F}"
+                                                Width="100" IsFilterable="False"  IsReadOnly="False" />
+                    <telerik:GridViewDataColumn Header="Total"  DataMemberBinding="{Binding TotalPrice}" DataFormatString="{}{0:F}"
+                                                Width="100" IsFilterable="False"  IsReadOnly="False"/>
+                    
+                    <telerik:GridViewColumn UniqueName="Print" IsVisible="True" Width="80">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadButton Style="{StaticResource RadButtonStlye}" 
+                                                                   Command="{Binding printCommand}" CommandParameter="{Binding}"
+                                                                   Content="View" />
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
+
+                    <telerik:GridViewColumn UniqueName="Delete" IsVisible="True" Width="80">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadButton Content="Delete" Style="{StaticResource RadButtonStlye}"
+											            Command="telerik:RadGridViewCommands.Delete"
+											            CommandParameter="{Binding}" telerik:TouchManager.IsTouchHitTestVisible="False"/>
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
+
+                </telerik:RadGridView.Columns>
+
+            </telerik:RadGridView>
+
+            <telerik:RadDataPager telerik:StyleManager.Theme="Windows8"             
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+							  x:Name="radDataPager1"
+							  PageSize="16" FontSize="12" 
+							  BorderThickness="1,0,1,1"
+							  Source="{Binding Items, ElementName=RadGridView1}"
+							  DisplayMode="All"
+							  AutoEllipsisMode="Both"
+							  NumericButtonCount="10"
+							  IsTotalItemCountFixed="True"  />
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

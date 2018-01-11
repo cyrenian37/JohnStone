@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="UISolution.Views.MainMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:UISolution"
+             xmlns:viewModel="clr-namespace:UISolution.ViewModels"
+             xmlns:Model="clr-namespace:UISolution.Models"
+             mc:Ignorable="d" 
+            d:DesignHeight="400" d:DesignWidth="1600"
+		    HorizontalAlignment="Center" VerticalAlignment="Center">
+
+    <UserControl.DataContext>
+        <viewModel:viewModelMain>
+            <viewModel:viewModelMain.NavigationItems>
+                <Model:NavigationItem DisplayName="PRODUCT" ColorBrush="#FF8EBC00" Image="/JohnStone;component/Images/TransitionControl/user_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/Contact_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.2" OverBurn="0.1">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/BloxyPattern.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="REPORT" ColorBrush="#FF1B9DDE" Image="/JohnStone;component/Images/TransitionControl/folder_icon.png"  
+                                      BigImage="/JohnStone;component/Images/TransitionControl/Mail_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.2" OverBurn="0">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/BrushReveal.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="ORDERS" ColorBrush="#FFF59700" Image="/JohnStone;component/Images/TransitionControl/photo_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/MyPhotos_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.5" OverBurn="0.25">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/SplitScreen.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="ACCOUNTS" ColorBrush="#FFC9D425" Image="/JohnStone;component/Images/TransitionControl/user_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/Contact_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.2" OverBurn="0.1">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/BloxyPattern.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="ADMIN" ColorBrush="#FFED1691" Image="/JohnStone;component/Images/TransitionControl/message_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/ThingsToDo_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.2" OverBurn="0">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/BrushReveal.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="OPTIONS" ColorBrush="#FF7E51A1" Image="/JohnStone;component/Images/TransitionControl/check_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/Events_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.5" OverBurn="0.25">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/SplitScreen.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="-" ColorBrush="#FF16ABA9" Image="/JohnStone;component/Images/TransitionControl/inspiration_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/Inspirations_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.2" OverBurn="0.1">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/BloxyPattern.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+                <Model:NavigationItem DisplayName="Log Out" ColorBrush="#FFFF6900" Image="/JohnStone;component/Images/TransitionControl/book_icon.png" 
+                                      BigImage="/JohnStone;component/Images/TransitionControl/Library_screen.png">
+                    <Model:NavigationItem.Transition>
+                        <telerik:MappedLightTransition WaveLength="0.2" OverBurn="0">
+                            <telerik:MappedLightTransition.ProgressMap>
+                                <ImageBrush ImageSource="/JohnStone;component/Images/TransitionControl/ProgressMaps/BrushReveal.jpg" />
+                            </telerik:MappedLightTransition.ProgressMap>
+                        </telerik:MappedLightTransition>
+                    </Model:NavigationItem.Transition>
+                </Model:NavigationItem>
+            </viewModel:viewModelMain.NavigationItems>
+
+        </viewModel:viewModelMain>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Resources.xaml" />
+                <ResourceDictionary Source="/WPFSmartLibraryLight35;component/ResourceDictionaries/CommonRD.xaml" />
+                <ResourceDictionary Source="../ResourceDictionaries/LoginDialogRD.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate x:Key="NavigationItemsTemplate">
+                <StackPanel>
+                    <Image Source="{Binding Image}" Margin="0 8" Width="36" Height="36" Stretch="UniformToFill" />
+                    <TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border x:Name="LayoutRoot" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <telerik:RadTransitionControl VerticalAlignment="Top" Transition="{Binding SelectedItem.Transition}" Content="{Binding SelectedItem.BigImage}">
+                <telerik:RadTransitionControl.ContentTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding }" Stretch="UniformToFill" Width="683" Height="300"/>
+                    </DataTemplate>
+                </telerik:RadTransitionControl.ContentTemplate>
+            </telerik:RadTransitionControl>
+
+            <telerik:RadListBox Grid.Row="1" ItemsSource="{Binding NavigationItems}" 
+                                ItemTemplate="{StaticResource NavigationItemsTemplate}" 
+                                ItemsPanel="{StaticResource RadListBoxItemsPanel}"
+                                SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+								x:Name="listBox" SelectionChanged="listBox_SelectionChanged" />
+
+
+
+            
+        </Grid>
+    </Border>
+</UserControl>

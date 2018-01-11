@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="UISolution.Views.Order"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:localView="clr-namespace:UISolution.Views"
+             xmlns:localModel="clr-namespace:UISolution.Models"
+             xmlns:local="clr-namespace:UISolution.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.Resources>
+
+            <DataTemplate x:Key="ProductTemplate"  >
+                <telerik:RadTabControl HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" telerik:StyleManager.Theme="Windows8" >
+                    <telerik:RadTabItem Header="Product" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  >
+                        <telerik:RadTabItem.Content >
+                            <StackPanel >
+                                <telerik:DataFormDataField Label="First Name" DataMemberBinding="{Binding FirstName, Mode=TwoWay}" Margin="0,10,0,0" />
+                                <telerik:DataFormDataField Label="Last Name" DataMemberBinding="{Binding LastName, Mode=TwoWay}" />
+                                <telerik:DataFormDataField Label="Salary" DataMemberBinding="{Binding Salary, Mode=TwoWay}" />
+                                <telerik:DataFormDataField Label="Starting Date" DataMemberBinding="{Binding StartingDate, Mode=TwoWay,StringFormat={}{0:dd-MMM-yyyy HH:mm:ss}}"  />
+                            </StackPanel>
+                        </telerik:RadTabItem.Content>
+                    </telerik:RadTabItem>
+
+                    <telerik:RadTabItem Header="Detail">
+                        <telerik:RadTabItem.Content>
+                            <StackPanel>
+                                <telerik:DataFormDataField Label="Phone Number" DataMemberBinding="{Binding PhoneNumber, Mode=TwoWay}" />
+                                <telerik:DataFormComboBoxField Label="Occupation"
+                                                       SelectedValuePath="Id" DisplayMemberPath="Name" ItemsSource="{Binding OccupationCollection}"
+                                                       DataMemberBinding="{Binding OccupationId, Mode=TwoWay}" />
+                            </StackPanel>
+                        </telerik:RadTabItem.Content>
+                    </telerik:RadTabItem>
+
+                </telerik:RadTabControl>
+
+
+            </DataTemplate>
+
+            <DataTemplate x:Key="ProductTemplate2">
+
+                <telerik:RadTabControl HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  
+                                           telerik:StyleManager.Theme="Windows8"  >
+                    <telerik:RadTabItem Header="Person" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  >
+                        <telerik:RadTabItem.Content>
+                            <StackPanel>
+                                <telerik:DataFormDataField Label="First Name" DataMemberBinding="{Binding FirstName, Mode=TwoWay}" Margin="0,10,0,0" />
+                                <telerik:DataFormDataField Label="Last Name" DataMemberBinding="{Binding LastName, Mode=TwoWay}" />
+                                <telerik:DataFormDataField Label="Salary" DataMemberBinding="{Binding Salary, Mode=TwoWay}" />
+                                <telerik:DataFormDataField Label="Starting Date" >
+                                    <telerik:RadDateTimePicker SelectedValue="{Binding StartingDate}" Width="200" HorizontalAlignment="Left"  />
+                                </telerik:DataFormDataField>
+                            </StackPanel>
+                        </telerik:RadTabItem.Content>
+                    </telerik:RadTabItem>
+
+                    <telerik:RadTabItem Header="Detail">
+                        <telerik:RadTabItem.Content>
+                            <StackPanel>
+                                <telerik:DataFormDataField Label="Phone Number" DataMemberBinding="{Binding PhoneNumber, Mode=TwoWay}" />
+                                <telerik:DataFormComboBoxField Label="Occupation"
+                                                       SelectedValuePath="Id" DisplayMemberPath="Name" ItemsSource="{Binding OccupationCollection}"
+                                                       DataMemberBinding="{Binding OccupationId, Mode=TwoWay}" />
+                            </StackPanel>
+                        </telerik:RadTabItem.Content>
+                    </telerik:RadTabItem>
+                </telerik:RadTabControl>
+            </DataTemplate>
+
+
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 5 00 0"
+                   IsHitTestVisible="False" Text="Orders" HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" FontSize="40" FontFamily="Myriad Pro" Foreground="#37000000" Height="60" Width="400"  />
+
+        <Rectangle x:Name="ProgressLine" Grid.Row="0"  Grid.ColumnSpan="3"                            
+                           Margin="0,0,0,10" VerticalAlignment="Bottom" Fill="Purple" Height="5">
+        </Rectangle>
+
+        <Button x:Name="btnHome"  Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="0 30 0 0"
+                        HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnHome_Click"
+                        ContentTemplate="{StaticResource TelerikLogoTemplate}" Style="{StaticResource BlankButtonStyle}" 
+                        Height="30" Width="40" RenderTransformOrigin="-0.936,-0.858"  />
+
+        <Grid Grid.Column="1" Grid.Row="2" >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <telerik:RadDataForm x:Name="myRadDataForm"  telerik:StyleManager.Theme="Windows8" 
+                             Grid.Row="0" 
+                             VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" 
+							 ItemsSource="{Binding Employees}"
+							 Header="{Binding SelectedItem, ElementName=RadGridView1, Converter={StaticResource HeaderConverter}}"
+                             AutoGenerateFields="False"  
+                             ReadOnlyTemplate="{StaticResource ProductTemplate}"                                                            
+                             EditTemplate="{StaticResource ProductTemplate2}"
+                             NewItemTemplate="{StaticResource ProductTemplate2}"
+                            
+                             CommandButtonsVisibility="All" />
+
+
+            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Row="2" >
+                <telerik:RadGridView x:Name="RadGridView1" 
+                                     GroupRenderMode="Flat"  telerik:StyleManager.Theme="Windows8"                         
+                             ClipboardCopyMode="All"
+                             ClipboardPasteMode="Default"
+                             SelectionMode="Extended"                            
+							 ColumnWidth="*"
+							 ItemsSource="{Binding Employees}"
+							 CanUserFreezeColumns="False"
+							 RowIndicatorVisibility="Collapsed"
+							 AutoGenerateColumns="False"
+							 IsReadOnly="True"
+							 ShowGroupPanel="False" 
+                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   >
+
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="First Name"	DataMemberBinding="{Binding FirstName}" Width="200" />
+                        <telerik:GridViewDataColumn Header="Last Name"	DataMemberBinding="{Binding LastName}" Width="100" />
+                        <telerik:GridViewDataColumn Header="Salary" DataMemberBinding="{Binding Salary, Mode=TwoWay}" Width="100"/>
+                        <telerik:GridViewDataColumn Header="Starting Date" DataMemberBinding="{Binding StartingDate, Mode=TwoWay,StringFormat={}{0:dd-MMM-yyyy HH:mm:ss}}" Width="100"  />
+                        <telerik:GridViewDataColumn Header="Phone Number" DataMemberBinding="{Binding PhoneNumber, Mode=TwoWay}" Width="100" />
+                        <telerik:GridViewDataColumn Header="Occupation"  DataMemberBinding="{Binding OccupationName, Mode=TwoWay}" Width="*" />
+                    </telerik:RadGridView.Columns>
+
+                </telerik:RadGridView>
+
+                <telerik:RadDataPager telerik:StyleManager.Theme="Windows8"             
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+							  x:Name="radDataPager1"
+							  PageSize="20" FontSize="12" 
+							  BorderThickness="1,0,1,1"
+							  Source="{Binding Items, ElementName=RadGridView1}"
+							  DisplayMode="All"
+							  AutoEllipsisMode="Both"
+							  NumericButtonCount="10"
+							  IsTotalItemCountFixed="True"  />
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="UISolution.Views.HomeMenu"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+			 xmlns:Models="clr-namespace:UISolution.Models" 
+			 mc:Ignorable="d" IsTabStop="True" 
+             d:DesignHeight="500" d:DesignWidth="1000">
+	<UserControl.DataContext>
+		<Models:SiteMap>
+			<Models:SiteMap.Pages>
+                <Models:SitePage DisplayName="PRODUCT" PageUri="/JohnStone;component/Views/menuProduct.xaml" 
+								 ColorBrush="#FF16ABA9" Image="/JohnStone;component/Images/book_icon.png"							
+								  DisplayPathWidth="36" DisplayPathHeight="32" />
+
+                <Models:SitePage DisplayName="SALES" PageUri="/JohnStone;component/Views/menuSales.xaml" 
+								 ColorBrush="#FF1B9DDE" 
+								  DisplayPathWidth="32" DisplayPathHeight="32" />
+                <Models:SitePage DisplayName="REPORTS" PageUri="/JohnStone;component/Views/menuReports.xaml" 
+								 ColorBrush="#FFF59700" 
+								  DisplayPathWidth="32" DisplayPathHeight="32" 
+								 />
+                <Models:SitePage DisplayName="SETTINGS" PageUri="/JohnStone;component/Views/menuSettings.xaml" 
+								 ColorBrush="#FFC9D425" 
+								  DisplayPathWidth="36" DisplayPathHeight="32" 
+								  />
+				<Models:SitePage DisplayName="-" 
+								 ColorBrush="#FFED1691"
+								  DisplayPathWidth="32" DisplayPathHeight="18" 
+								  />
+                <Models:SitePage DisplayName="-" 
+								 ColorBrush="#FF7E51A1"
+								  DisplayPathWidth="32" DisplayPathHeight="18" 
+								  />
+                <Models:SitePage DisplayName=" " 
+								 ColorBrush="#FF16ABA9" 
+								  DisplayPathWidth="32" DisplayPathHeight="24" 
+								  />
+                <Models:SitePage DisplayName="LOG OUT" 
+								 ColorBrush="#FF16ABA9" Image="/JohnStone;component/Images/LogOut2.png"
+								  DisplayPathWidth="32" DisplayPathHeight="24" 
+								  />
+			</Models:SiteMap.Pages>
+		</Models:SiteMap>
+	</UserControl.DataContext>
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Resources.xaml" />
+				<ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Resources2.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<Style x:Key="FrameStyle" TargetType="Frame">
+				<Setter Property="BorderBrush" Value="#FFD4D2D2" />
+				<Setter Property="BorderThickness" Value="0" />
+				<Setter Property="HorizontalAlignment" Value="Center" />
+				<Setter Property="HorizontalContentAlignment" Value="Center" />
+				<Setter Property="Width" Value="800" />
+				<Setter Property="Margin" Value="0" />
+				<Setter Property="Height" Value="300" />
+				<Setter Property="SnapsToDevicePixels" Value="True" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="Frame">
+							<Grid Background="{TemplateBinding Background}">
+								<telerik:RadTransitionControl x:Name="PART_FrameCP" 
+															  Content="{TemplateBinding Content}" 
+															  ContentTemplate="{TemplateBinding ContentTemplate}">
+									<telerik:RadTransitionControl.Transition>
+										<telerik:SlideAndZoomTransition />
+									</telerik:RadTransitionControl.Transition>
+								</telerik:RadTransitionControl>
+								<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+										Padding="{TemplateBinding Padding}" />
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<DataTemplate x:Key="CustomTemplate">
+				<Grid HorizontalAlignment="Center">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="36"/>
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Path Data="{Binding DisplayPath}" Fill="White" Height="{Binding DisplayPathHeight}" Width="{Binding DisplayPathWidth}" Stretch="Fill" />
+					<StackPanel Grid.Row="1">
+						<StackPanel Orientation="Horizontal" Margin="0 3 0 0 ">
+							<TextBlock Text="{Binding DisplayMaxTemperature}" Style="{StaticResource TextBoxBoldStyle}"/>
+							<TextBlock Text="{Binding DisplayMinTemperature}" Style="{StaticResource TextBoxNormalStyle}" />
+						</StackPanel>
+						<TextBlock Text="{Binding DisplayName}" Style="{StaticResource TextBoxHeaderStyle}" />
+					</StackPanel>
+				</Grid>
+			</DataTemplate>
+
+			<DataTemplate x:Key="NavigationItemsTemplate">
+				<StackPanel>
+					<Image Source="{Binding Image}" Margin="0 8" Width="36" Height="36" Stretch="UniformToFill" />
+					<TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" />
+				</StackPanel>
+			</DataTemplate>
+			
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<Grid  VerticalAlignment="Top" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="10 5 00 0"
+                   IsHitTestVisible="False" Text="Main Menu" HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" FontSize="40" FontFamily="Myriad Pro" Foreground="#37000000" Height="60" Width="400"  />
+
+        <Rectangle x:Name="ProgressLine" Grid.Row="0"  Grid.ColumnSpan="3"                            
+                           Margin="0,0,0,10" VerticalAlignment="Bottom" Fill="Purple" Height="5">
+        </Rectangle>
+
+        <Frame Grid.Row="2" Grid.Column="1" Style="{StaticResource FrameStyle}" Source="{Binding SelectedPage.PageUri}" SnapsToDevicePixels="True"/>
+
+		<!--<telerik:RadListBox ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}" Grid.Row="1"
+							ItemTemplate="{StaticResource CustomTemplate}" VerticalAlignment="Top" HorizontalAlignment="Left"
+							Style="{StaticResource ListBoxStyle}"   />-->
+
+            
+		<telerik:RadListBox x:Name="listMainMenuBox" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Pages}" VerticalAlignment="Bottom" 
+								ItemTemplate="{StaticResource NavigationItemsTemplate}" 
+								ItemsPanel="{StaticResource RadListBoxItemsPanel}"
+								SelectedItem="{Binding SelectedPage, Mode=TwoWay}" 
+                                SelectionChanged="listMainMenuBox_SelectionChanged"
+								 />
+        
+    </Grid>
+</UserControl>

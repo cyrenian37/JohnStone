@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="UISolution.Views.DynamicCols"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+              xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+			 xmlns:localView="clr-namespace:UISolution.Views"
+			 xmlns:localModel="clr-namespace:UISolution.Models"
+			 xmlns:local="clr-namespace:UISolution.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>           
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+
+
+        <telerik:RadGridView Grid.Column="0" ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                             Name="gridCategory" telerik:StyleManager.Theme="Summer" 
+                             ItemsSource="{Binding Categories}" ColumnWidth="*"
+                             AutoGenerateColumns="False"                                  
+                             Deleting="gridCategory_Deleting"
+                             Deleted="gridCategory_Deleted"
+                             AddingNewDataItem="AddingNewDataItem"
+                             NewRowPosition="Top"  />
+
+      
+    </Grid>
+</UserControl>

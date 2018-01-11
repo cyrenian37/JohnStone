@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="6.5in" Name="TESTReport" xmlns="http://schemas.telerik.com/reporting/2012/3.8">
+  <DataSources>
+    <SqlDataSource ConnectionString="HanSung" SelectCommand="SELECT&#xD;&#xA;&#x9;[HS].[Person].[FirstName], &#xD;&#xA;&#x9;[HS].[Person].[LastName], &#xD;&#xA;&#x9;[HS].[Person].[Address1], &#xD;&#xA;&#x9;[HS].[Person].[Address2], &#xD;&#xA;&#x9;[HS].[Person].[Phone1]&#xD;&#xA;FROM [HS].[Person]&#xD;&#xA;where LastName = @paramLast" Name="sqlDataSource1" ParameterValues="{&quot;@paramLast&quot;:&quot;Choi&quot;}" QueryDesignerState="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;DM xmlns:z=&quot;http://schemas.microsoft.com/2003/10/Serialization/&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://schemas.datacontract.org/2004/07/Telerik.Reporting.Design.QueryDesigner&quot;&gt;&lt;Es&gt;&lt;E z:Id=&quot;i1&quot;&gt;&lt;MBN&gt;Person&lt;/MBN&gt;&lt;MBP z:Id=&quot;i2&quot; i:type=&quot;Namespace&quot;&gt;&lt;MBN&gt;HS&lt;/MBN&gt;&lt;MOC&gt;&lt;MB z:Ref=&quot;i1&quot; /&gt;&lt;/MOC&gt;&lt;/MBP&gt;&lt;MOC&gt;&lt;MB z:Id=&quot;i3&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;FirstName&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;MB z:Id=&quot;i4&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;LastName&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;MB z:Id=&quot;i5&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;Address1&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;MB z:Id=&quot;i6&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;Address2&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;MB z:Id=&quot;i7&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;Phone1&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;/MOC&gt;&lt;ER /&gt;&lt;/E&gt;&lt;/Es&gt;&lt;Fs /&gt;&lt;Ps&gt;&lt;P z:Ref=&quot;i3&quot; /&gt;&lt;P z:Ref=&quot;i4&quot; /&gt;&lt;P z:Ref=&quot;i5&quot; /&gt;&lt;P z:Ref=&quot;i6&quot; /&gt;&lt;P z:Ref=&quot;i7&quot; /&gt;&lt;/Ps&gt;&lt;Rs /&gt;&lt;/DM&gt;">
+      <Parameters>
+        <SqlDataSourceParameter DbType="String" Name="@paramLast">
+          <Value>
+            <String>= Parameters.paramLastName.Value</String>
+          </Value>
+        </SqlDataSourceParameter>
+      </Parameters>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <PageHeaderSection Height="1in" Name="pageHeaderSection1">
+      <Items>
+        <TextBox Width="2.70000076293945in" Height="0.399999936421712in" Left="3.40000025431315in" Top="0.199999968210856in" Value="= Parameters.paramLastName.Label" Name="textBox11" />
+      </Items>
+    </PageHeaderSection>
+    <DetailSection Height="2in" Name="detailSection1">
+      <Items>
+        <Table DataSourceName="sqlDataSource1" Width="4in" Height="0.4in" Left="0.199999968210856in" Top="0.199999968210856in" Name="table1" StyleName="Office.TableNormal">
+          <Body>
+            <Cells>
+              <TableCell RowIndex="0" ColumnIndex="0" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Address1" Name="textBox6" StyleName="Office.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="1" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Address2" Name="textBox7" StyleName="Office.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.FirstName" Name="textBox8" StyleName="Office.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="3" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.LastName" Name="textBox9" StyleName="Office.TableBody" />
+                </ReportItem>
+              </TableCell>
+              <TableCell RowIndex="0" ColumnIndex="4" RowSpan="1" ColumnSpan="1">
+                <ReportItem>
+                  <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="= Fields.Phone1" Name="textBox10" StyleName="Office.TableBody" />
+                </ReportItem>
+              </TableCell>
+            </Cells>
+            <Columns>
+              <Column Width="0.800000011920929in" />
+              <Column Width="0.800000011920929in" />
+              <Column Width="0.800000011920929in" />
+              <Column Width="0.800000011920929in" />
+              <Column Width="0.800000011920929in" />
+            </Columns>
+            <Rows>
+              <Row Height="0.2in" />
+            </Rows>
+          </Body>
+          <Corner />
+          <RowGroups>
+            <TableGroup Name="Detail">
+              <Groupings>
+                <Grouping />
+              </Groupings>
+            </TableGroup>
+          </RowGroups>
+          <ColumnGroups>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Address1" Name="textBox1" StyleName="Office.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Address2" Name="textBox2" StyleName="Office.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="First Name" Name="textBox3" StyleName="Office.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Last Name" Name="textBox4" StyleName="Office.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+            <TableGroup>
+              <ReportItem>
+                <TextBox Width="0.8in" Height="0.2in" Left="0in" Top="0in" Value="Phone1" Name="textBox5" StyleName="Office.TableHeader" />
+              </ReportItem>
+            </TableGroup>
+          </ColumnGroups>
+        </Table>
+      </Items>
+    </DetailSection>
+    <PageFooterSection Height="1in" Name="pageFooterSection1" />
+  </Items>
+  <StyleSheet>
+    <StyleRule>
+      <Style>
+        <Padding Left="2pt" Right="2pt" />
+      </Style>
+      <Selectors>
+        <TypeSelector Type="TextItemBase" />
+        <TypeSelector Type="HtmlTextBox" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style Color="20, 34, 77">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Calibri" Size="9pt" />
+      </Style>
+      <Selectors>
+        <StyleSelector Type="Table" StyleName="Office.TableNormal" />
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style BackgroundColor="121, 167, 227" Color="20, 34, 77" VerticalAlign="Middle">
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Calibri" Size="10pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Office.TableHeader" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+    <StyleRule>
+      <Style>
+        <BorderStyle Default="Solid" />
+        <BorderColor Default="Black" />
+        <BorderWidth Default="1px" />
+        <Font Name="Calibri" Size="9pt" />
+      </Style>
+      <Selectors>
+        <DescendantSelector>
+          <Selectors>
+            <TypeSelector Type="Table" />
+            <StyleSelector Type="ReportItem" StyleName="Office.TableBody" />
+          </Selectors>
+        </DescendantSelector>
+      </Selectors>
+    </StyleRule>
+  </StyleSheet>
+  <PageSettings>
+    <PageSettings PaperKind="Letter" Landscape="False" ColumnCount="1" ColumnSpacing="0in">
+      <Margins>
+        <MarginsU Left="1in" Right="1in" Top="1in" Bottom="1in" />
+      </Margins>
+    </PageSettings>
+  </PageSettings>
+  <ReportParameters>
+    <ReportParameter Name="paramLastName" Text="Last Name : " Visible="True">
+      <Value>
+        <String>Choi</String>
+      </Value>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

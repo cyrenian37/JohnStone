@@ -1,0 +1,12 @@
+﻿<Window x:Class="SunSeven.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfsl="http://schemas.softarcs.com/wpfsmartlibrary"
+        WindowState="Maximized" Closed="Window_Closed"
+        Icon="/JohnStone;component/Images/JSLogo2.ico"
+        Title="JohnStone Fruits Veg Ltd" Height="350" Width="525">
+    
+    <Grid>
+        <ContentControl x:Name="contentControl" />
+    </Grid>
+</Window>

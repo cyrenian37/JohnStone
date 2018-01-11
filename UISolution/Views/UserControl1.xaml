@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="UISolution.Views.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 xmlns:localView="clr-namespace:UISolution.Views"
+             xmlns:localVM="clr-namespace:UISolution.ViewModels"
+			 xmlns:localModel="clr-namespace:UISolution.Models"
+			 xmlns:local="clr-namespace:UISolution.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+  
+
+    <Grid>
+        <telerik:RadDocking   BorderThickness="0" Padding="0" >
+
+            <telerik:RadDocking.DocumentHost>
+
+
+                <telerik:RadSplitContainer Orientation="Vertical" InitialPosition="DockedTop" >
+                    <telerik:RadPaneGroup>
+                        <telerik:RadPane Header="Invoice" CanUserClose="False" >
+                            <TextBlock Text="Pane Left 1" />
+                        </telerik:RadPane>
+                    </telerik:RadPaneGroup>
+                    <telerik:RadPaneGroup>
+                        <telerik:RadPane Header="Invoice History" CanUserClose="False" >
+                            <TextBlock Text="Pane Left 2" />
+                        </telerik:RadPane>
+                    </telerik:RadPaneGroup>
+                </telerik:RadSplitContainer>
+
+            </telerik:RadDocking.DocumentHost>
+
+
+
+        </telerik:RadDocking>
+    </Grid>
+
+</UserControl>

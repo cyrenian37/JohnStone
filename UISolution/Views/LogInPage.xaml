@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="SunSeven.Views.LogInPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpfsl="http://schemas.softarcs.com/wpfsmartlibrary"
+             mc:Ignorable="d" 
+             
+             d:DesignHeight="600" d:DesignWidth="600">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Resources.xaml" />
+                <ResourceDictionary Source="/WPFSmartLibraryLight35;component/ResourceDictionaries/CommonRD.xaml" />
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/LoginDialogRD.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+        </ResourceDictionary>
+
+
+    </UserControl.Resources>
+
+    <Grid Background="#65F6F6F6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+
+        <TextBlock x:Name="txtCompany" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+                   IsHitTestVisible="False" Text="JohnStone Fruits &amp; Veg Ltd" HorizontalAlignment="Left" 
+                  VerticalAlignment="Bottom" FontSize="35" FontFamily="Myriad Pro" Foreground="#37000000" Height="40" Width="500"  />
+
+        <Rectangle x:Name="ProgressLine" Grid.Row="1"  Grid.ColumnSpan="3"                            
+                           Margin="0,5,0,10" VerticalAlignment="Bottom" Fill="DarkGray" Height="5">
+        </Rectangle>
+
+
+        <wpfsl:SmartLoginOverlay x:Name="LoginControl" Width="500" Margin="0 0 50 0"
+                                     Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"
+										 FullSpan="On"
+										 IsUserOptionAvailable="True"
+										 UserName="{Binding UserName}"
+										 Password="{Binding Password}"
+										 UserImageSource="{Binding UserImageSource}"
+										 AdditionalSystemInfo="Locked"
+										 Command="{Binding SubmitCommand}"
+										 CommandParameter="{Binding RelativeSource={RelativeSource Self} }" />
+      
+        <!--**** Try also setting the Background Property to this : Background="#FF182067"    ****-->
+
+        <!--<Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" FontSize="9"
+				 HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="LightSkyBlue"
+				 Content="Demo Data Information  =>  User: sunchil * Password: passme   /   User: eunlyong * Password: passme" />-->
+        
+            
+    </Grid>
+</UserControl>

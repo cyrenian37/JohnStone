@@ -1,0 +1,289 @@
+﻿<UserControl x:Class="SunSeven.Views.Configuration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+              xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+			
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1000">
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid Margin="10">
+
+        <telerik:RadDocking  x:Name="dockingMain" BorderThickness="0" Margin="10" >
+
+            <telerik:RadSplitContainer Orientation="Vertical" InitialPosition="DockedLeft" Width="400" >
+                <telerik:RadPaneGroup>
+                    <telerik:RadPane Header="Category" CanUserClose="False" >
+                        <telerik:RadGridView ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                             Name="gridCategory" telerik:StyleManager.Theme="Office_Black" 
+                             ItemsSource="{Binding Categories}" ColumnWidth="*"
+                             AutoGenerateColumns="False"                                  
+                             Deleting="gridCategory_Deleting"
+                             Deleted="gridCategory_Deleted"
+                             AddingNewDataItem="AddingNewDataItem"
+                             NewRowPosition="Top"  >
+
+                            <telerik:RadGridView.ChildTableDefinitions>
+                                <telerik:GridViewTableDefinition>
+                                    <telerik:GridViewTableDefinition.Relation>
+                                        <telerik:PropertyRelation ParentPropertyName="ParentId"  />
+                                    </telerik:GridViewTableDefinition.Relation>
+                                </telerik:GridViewTableDefinition>
+                            </telerik:RadGridView.ChildTableDefinitions>
+
+
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn DataMemberBinding="{Binding CategoryName}" Header="Category" Width="*"/>
+                                <telerik:GridViewColumn Width="60">
+                                    <telerik:GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                                <telerik:RadButton.Content>
+                                                    <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                </telerik:RadButton.Content>
+                                            </telerik:RadButton>
+                                        </DataTemplate>
+                                    </telerik:GridViewColumn.CellTemplate>
+                                </telerik:GridViewColumn>
+
+                            </telerik:RadGridView.Columns>
+
+                            <telerik:RadGridView.HierarchyChildTemplate>
+                                <DataTemplate>
+                                    <telerik:RadGridView x:Name="gridSubCategory" ShowGroupPanel="False" RowIndicatorVisibility="Collapsed" FontSize="15"
+                                     telerik:StyleManager.Theme="Office_Silver"  GridLinesVisibility="None"  Margin="10" Width="300" HorizontalAlignment="Left"
+                                     ItemsSource="{Binding Subcategory}" 
+                                     AddingNewDataItem="AddingNewDataItem"
+                                     NewRowPosition="Top"                                    
+                                     AutoGenerateColumns="False">
+                                        <telerik:RadGridView.Columns>
+                                            <telerik:GridViewDataColumn DataMemberBinding="{Binding CategoryName}" Width="*" Header="Sub Category"/>
+                                            <telerik:GridViewColumn Width="60">
+                                                <telerik:GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+
+
+                                                        <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                                            <telerik:RadButton.Content>
+                                                                <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                            </telerik:RadButton.Content>
+                                                        </telerik:RadButton>
+
+                                                    </DataTemplate>
+                                                </telerik:GridViewColumn.CellTemplate>
+                                            </telerik:GridViewColumn>
+                                        </telerik:RadGridView.Columns>
+                                    </telerik:RadGridView>
+                                </DataTemplate>
+                            </telerik:RadGridView.HierarchyChildTemplate>
+
+                        </telerik:RadGridView>
+                    </telerik:RadPane>
+                </telerik:RadPaneGroup>
+            </telerik:RadSplitContainer>
+
+            <telerik:RadSplitContainer Orientation="Vertical" InitialPosition="DockedLeft"  Width="400" >
+                <telerik:RadPaneGroup>
+                    <telerik:RadPane Header="Client Type" CanUserClose="False" >
+
+                        <telerik:RadGridView Grid.Column="2" ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                             Name="gridClientType" telerik:StyleManager.Theme="Office_Black"  
+                             ItemsSource="{Binding ClientTypes}" ColumnWidth="*"
+                             Deleted="gridClientType_Deleted"   
+                             Deleting="gridClientType_Deleting"
+                             
+                             AutoGenerateColumns="False"                                                               
+                             NewRowPosition="Top"  >
+
+
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn DataMemberBinding="{Binding Type}" Header="Type" Width="*"/>
+                                <telerik:GridViewColumn Width="60">
+                                    <telerik:GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                                <telerik:RadButton.Content>
+                                                    <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                </telerik:RadButton.Content>
+                                            </telerik:RadButton>
+                                        </DataTemplate>
+                                    </telerik:GridViewColumn.CellTemplate>
+                                </telerik:GridViewColumn>
+
+                            </telerik:RadGridView.Columns>
+
+                        </telerik:RadGridView>
+
+                    </telerik:RadPane>
+
+                </telerik:RadPaneGroup>
+
+            </telerik:RadSplitContainer>
+
+
+            <telerik:RadDocking.DocumentHost>
+
+                <telerik:RadSplitContainer Orientation="Vertical" InitialPosition="DockedTop" >
+                    <telerik:RadPaneGroup>
+                        <telerik:RadPane Header="VAT" CanUserClose="False" >
+
+                            <telerik:RadGridView Grid.Column="2" ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                                Name="gridVAT" telerik:StyleManager.Theme="Office_Black"  
+                                ItemsSource="{Binding VATRates}" ColumnWidth="*"
+                                AutoGenerateColumns="False"   
+                                Deleted="gridVAT_Deleted"   
+                                Deleting="gridVAT_Deleting"
+                                NewRowPosition="Top"  >
+
+
+                                <telerik:RadGridView.Columns>
+                                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Name}" Header="VAT Name" Width="*"/>
+                                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Rate}" Header="Rate" Width="100"/>
+                                    <telerik:GridViewColumn Width="60">
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                                    <telerik:RadButton.Content>
+                                                        <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
+
+                                </telerik:RadGridView.Columns>
+
+                            </telerik:RadGridView>
+
+                        </telerik:RadPane>
+
+                        <telerik:RadPane Header="Unit" CanUserClose="False" >
+                            <telerik:RadGridView Grid.Column="2" ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                                Name="gridSellingUnit" telerik:StyleManager.Theme="Office_Black"  
+                                ItemsSource="{Binding SellingUnits}" ColumnWidth="*"
+                                AutoGenerateColumns="False"  
+                                Deleted="gridSellingUnit_Deleted"   
+                                Deleting="gridSellingUnit_Deleting"
+                                AddingNewDataItem="gridSellingUnit_AddingNewDataItem"
+                                NewRowPosition="Top"  >
+
+                                <!--Deleting="gridCategory_Deleting"
+                             Deleted="gridCategory_Deleted"
+                             AddingNewDataItem="AddingNewDataItem"-->
+                                <telerik:RadGridView.Columns>
+                                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Unit}" Header="Unit" Width="*" IsReadOnlyBinding="{Binding ReadOnly}" />
+                                    <telerik:GridViewColumn Width="60"  >
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  
+                                                                   CommandParameter="{Binding}" IsEnabled="{Binding CanDelete}" >
+                                                    <telerik:RadButton.Content>
+                                                        <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
+
+                                </telerik:RadGridView.Columns>
+
+                            </telerik:RadGridView>
+
+                        </telerik:RadPane>
+                    </telerik:RadPaneGroup>
+                    <telerik:RadPaneGroup>
+                        <telerik:RadPane Header="Roles" CanUserClose="False" >
+
+                            <telerik:RadGridView Grid.Column="2" ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                             Name="gridRoles" telerik:StyleManager.Theme="Office_Black"  
+                             ItemsSource="{Binding Roles}" ColumnWidth="*"
+                             AutoGenerateColumns="False"    
+                             Deleted="gridRoles_Deleted"   
+                             Deleting="gridRoles_Deleting"                    
+                             NewRowPosition="Top"  >
+
+
+                                <telerik:RadGridView.Columns>
+                                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Name}" Header="Role" Width="*"/>
+                                    <telerik:GridViewColumn Width="60">
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                                    <telerik:RadButton.Content>
+                                                        <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
+
+                                </telerik:RadGridView.Columns>
+
+                            </telerik:RadGridView>
+
+                        </telerik:RadPane>
+
+
+                        <telerik:RadPane Header="Department" CanUserClose="False" >
+                            <telerik:RadGridView Grid.Column="4" ShowGroupPanel="False" FontSize="16"
+                                 RowIndicatorVisibility="Collapsed" GridLinesVisibility="Horizontal"
+                             Name="gridDepartment" telerik:StyleManager.Theme="Office_Black"  
+                             ItemsSource="{Binding Departments}" ColumnWidth="*"
+                             AutoGenerateColumns="False"   
+                                                 Deleted="gridDepartment_Deleted"
+                                                 Deleting="gridDepartment_Deleting"
+                             NewRowPosition="Top"  >
+
+                                <!--Deleting="gridCategory_Deleting"
+                             Deleted="gridCategory_Deleted"
+                             AddingNewDataItem="AddingNewDataItem"-->
+                                <telerik:RadGridView.Columns>
+                                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Name}" Header="Department" Width="*"/>
+                                    <telerik:GridViewColumn Width="60">
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadButton Command="telerikGrid:RadGridViewCommands.Delete"  CommandParameter="{Binding}" >
+                                                    <telerik:RadButton.Content>
+                                                        <Image Source="../Images/delete.png" Width="12" Height="12" />
+                                                    </telerik:RadButton.Content>
+                                                </telerik:RadButton>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
+
+                                </telerik:RadGridView.Columns>
+
+                            </telerik:RadGridView>
+
+                        </telerik:RadPane>
+
+                       
+                    </telerik:RadPaneGroup>
+
+
+                </telerik:RadSplitContainer>
+
+            </telerik:RadDocking.DocumentHost>
+
+
+        </telerik:RadDocking>
+    </Grid>
+</UserControl>

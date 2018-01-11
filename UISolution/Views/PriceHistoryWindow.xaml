@@ -1,0 +1,124 @@
+﻿<telerik:RadWindow x:Class="SunSeven.Views.PriceHistoryWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:localModel="clr-namespace:SunSeven.Models"
+                   telerik:StyleManager.Theme="Office_Silver"                     
+                   Header="Price History"
+                   Width="270" Height="400">
+    
+    <telerik:RadWindow.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+
+    </telerik:RadWindow.Resources>
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--<StackPanel Grid.Row="0"  Margin="3" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Image Source="/JohnStone;component/Images/Edit_Find.png" Height="13" Width="13" Margin="0,0,10,0" />
+            <TextBox  x:Name="textBoxFilterValue" Width="200" HorizontalAlignment="Right"/>
+        </StackPanel>-->
+
+        <TextBox x:Name="txtProduct" Background="Transparent" Margin="3" BorderThickness="0" FontWeight="Bold" ></TextBox>
+        <telerik:RadTabControl VerticalAlignment="Top" telerik:StyleManager.Theme="Office_Silver" ScrollMode="Viewport" BorderThickness="0" Grid.Row="2">
+            <telerik:RadTabItem DropDownContent="Price History" Header="Price History" >
+                <telerik:RadGridView Name="gridPriceHistory" Grid.Column="2" ShowGroupPanel="False" FontSize="12" Margin="5" VerticalAlignment="Top" 
+                                                        RowIndicatorVisibility="Collapsed" GridLinesVisibility="Both"
+                                                        telerik:StyleManager.Theme="Office_Silver"  
+                                                        ColumnWidth="*" IsReadOnly="True"     
+                                                        IsFilteringAllowed="False" 
+                                                        AutoGenerateColumns="False" ShowColumnFooters="False" >
+                                                        <!--localModel:CustomFilterBehavior.TextBox="{Binding ElementName=textBoxFilterValue}">-->
+                    <!--<telerik:RadGridView.SortDescriptors>
+                        <telerik:ColumnSortDescriptor Column="{Binding OrderDate}"  SortDirection="Descending" />
+                    </telerik:RadGridView.SortDescriptors>-->
+
+                    <telerik:RadGridView.SortDescriptors>
+                        <telerik:SortDescriptor Member="DeliveryDate" SortDirection="Descending" />
+                    </telerik:RadGridView.SortDescriptors>
+                    
+                    <telerik:RadGridView.Columns>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding DeliveryDate, StringFormat={}{0:dd-MMM-yyyy}}" 
+                                                                    Header="Delivery Date" Width="95"  IsFilterable="True" />
+
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding Product}" 
+                                                                    Header="Product" Width="*"  IsFilterable="True" />-->
+
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding VAT}" 
+                                                                    Header="Vat Rate" Width="80"  IsFilterable="True" />-->
+
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding Unit}" 
+                                                                    Header="Unit" Width="80"  IsFilterable="true" />-->
+                        
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding UnitPrice, ConverterCulture=en-IE, StringFormat={}{0:C}}" 
+                                                                    Header="Price" Width="70"  IsFilterable="False" />
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Quantity}" 
+                                                                    Header="Quantity" Width="*"  IsFilterable="False" />
+
+                        
+                        
+                    </telerik:RadGridView.Columns>
+
+                </telerik:RadGridView>
+
+            </telerik:RadTabItem>
+            <telerik:RadTabItem DropDownContent="Quotation History" Header="Quotation History">
+                <telerik:RadGridView Name="gridSalesHistory" Grid.Column="2" ShowGroupPanel="False" FontSize="12" Margin="5" VerticalAlignment="Top" 
+                                                        RowIndicatorVisibility="Collapsed" GridLinesVisibility="Both"
+                                                        telerik:StyleManager.Theme="Office_Silver" 
+                                                        ColumnWidth="*" IsReadOnly="True" 
+                                                        ItemsSource="{Binding}" IsFilteringAllowed="False" 
+                                                        AutoGenerateColumns="False" ShowColumnFooters="False"  >
+                                                        <!--localModel:CustomFilterBehavior.TextBox="{Binding ElementName=textBoxFilterValue}">-->
+
+                    <telerik:RadGridView.SortDescriptors>
+                        <telerik:SortDescriptor Member="SalesDate" SortDirection="Descending" />
+                    </telerik:RadGridView.SortDescriptors>
+                    <telerik:RadGridView.Columns>
+
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding SalesDate, StringFormat={}{0:dd-MMM-yyyy}}" 
+                                                                    Header="Quot Date" Width="85"  IsFilterable="True" />
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding ExpireDate, StringFormat={}{0:dd-MMM-yyyy}}" 
+                                                                    Header="Expire Date" Width="85"  IsFilterable="True" />
+
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding Product}" 
+                                                                    Header="Product" Width="*"  IsFilterable="True" />-->
+                        
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding VAT}" 
+                                                                    Header="Vat Rate" Width="80"  IsFilterable="True" />-->
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding Unit}" 
+                                                                    Header="Unit" Width="90" IsReadOnly="False" IsFilterable="true" />-->
+                        
+                        <telerik:GridViewDataColumn DataMemberBinding="{Binding UnitPrice, ConverterCulture=en-IE, StringFormat={}{0:C}}" 
+                                                                    Header="Price" Width="*"  IsFilterable="False" />
+                            
+                        <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding Price, ConverterCulture=en-IE, StringFormat={}{0:C}}" 
+                                                                    Header="Price" Width="80"  IsFilterable="False" />-->
+
+
+                      
+
+                    </telerik:RadGridView.Columns>
+
+                </telerik:RadGridView>
+
+            </telerik:RadTabItem>
+           
+        </telerik:RadTabControl>
+    </Grid>
+    
+    
+</telerik:RadWindow>

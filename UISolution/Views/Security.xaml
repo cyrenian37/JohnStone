@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="SunSeven.Views.Security"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:localModel="clr-namespace:SunSeven.Models"       
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid Margin="10" >
+               
+        <telerik:RadGridView x:Name="RadGridView1" FontSize="14" Width="900" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center"
+							 GroupRenderMode="Flat" telerik:StyleManager.Theme="Office_Silver"                           
+							 ClipboardCopyMode="All"
+							 ClipboardPasteMode="Default"                             
+							 SelectionMode="Single" 		                            
+							 ItemsSource="{Binding SecuritySet}"
+							 CanUserFreezeColumns="False"
+							 RowIndicatorVisibility="Collapsed"
+							 AutoGenerateColumns="False" NewRowPosition="Top" 							 
+							 ShowGroupPanel="False"
+                             RowValidated="RadGridView1_RowValidated"  
+                             RowEditEnded="RadGridView1_RowEditEnded"
+                             Deleting="RadGridView1_Deleting"
+                             Deleted="RadGridView1_Deleted">
+
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="User Name" DataMemberBinding="{Binding UserName}" Width="*"  />
+                <telerik:GridViewComboBoxColumn Header="Employee" Width="150"
+                                DataMemberBinding="{Binding EmployeeId}"
+                                ItemsSourceBinding="{Binding DataContext.Employees, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                SelectedValueMemberPath="Id"
+                                DisplayMemberPath="EmpDetail" />
+                
+                
+                <telerik:GridViewDataColumn Header="Password" DataMemberBinding="{Binding Password}" Width="150"  />
+                <telerik:GridViewComboBoxColumn Header="Role" Width="150"
+                                DataMemberBinding="{Binding RoleId}"
+                                ItemsSourceBinding="{Binding DataContext.Roles, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                SelectedValueMemberPath="Id"
+                                DisplayMemberPath="Name" />
+
+                <telerik:GridViewDataColumn Header="Access Level" DataMemberBinding="{Binding AccessLevel}" Width="100"  >
+                    <telerik:GridViewColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadNumericUpDown IsEditable="False" Minimum="0" Maximum="5" IsInteger="True"  Value="{Binding AccessLevel}"  />
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                
+     
+                <telerik:GridViewColumn UniqueName="Screen Menu" IsVisible="True" Width="100">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Content="Screen" Style="{StaticResource RadButtonStlye}"
+											            Command="{Binding screenCommand}"
+											            CommandParameter="{Binding this}" telerik:TouchManager.IsTouchHitTestVisible="False"/>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+
+                <telerik:GridViewColumn UniqueName="Delete" IsVisible="True" Width="80">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Content="Delete" Style="{StaticResource RadButtonStlye}" 
+											            Command="telerik:RadGridViewCommands.Delete"
+											            CommandParameter="{Binding}" telerik:TouchManager.IsTouchHitTestVisible="False"/>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
+            </telerik:RadGridView.Columns>
+
+
+        </telerik:RadGridView>
+
+
+    </Grid>
+</UserControl>

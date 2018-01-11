@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="SunSeven.Views.Suppliers"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 xmlns:localView="clr-namespace:SunSeven.Views"
+			 xmlns:localModel="clr-namespace:SunSeven.Models"
+			 xmlns:local="clr-namespace:SunSeven.Views"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="800" d:DesignWidth="1000">
+
+	<UserControl.Resources>
+
+		<ResourceDictionary>
+
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/JohnStone;component/ResourceDictionaries/Common.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+		</ResourceDictionary>
+
+	</UserControl.Resources>
+	<Grid>
+
+		<Grid.Resources>
+
+			<DataTemplate x:Key="ReadTemplate"  >
+				<StackPanel>
+
+					<telerik:DataFormDataField Label="Supplier" DataMemberBinding="{Binding SupplierName}" Margin="0,10,0,0" />
+					<telerik:DataFormDataField Label="Billing Address" DataMemberBinding="{Binding BillingAddress}" />
+
+
+
+					<telerik:DataFormDataField Label="Contact" DataMemberBinding="{Binding FullName, Mode=OneTime }"  />
+
+				</StackPanel>
+
+			</DataTemplate>
+
+			<DataTemplate x:Key="EditTemplate">
+
+				<StackPanel>
+
+					<telerik:DataFormDataField Label="Supplier" DataMemberBinding="{Binding SupplierName}" Margin="0,10,0,0" />
+
+
+					<telerik:DataFormDataField Label="Billing Address" DataMemberBinding="{Binding BillingAddress}" />
+
+	   
+
+					<telerik:DataFormDataField Label="Contact" >
+
+						<telerik:RadComboBox SelectedValuePath="Id" 
+												 SelectedValue="{Binding ContactId}" 
+												 SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
+												 ItemsSource="{Binding PersonCollection}" >
+							<telerik:RadComboBox.ItemTemplate>
+
+								<DataTemplate>
+									<StackPanel Orientation="Horizontal" >
+										<TextBlock Text="{Binding FirstName}" Margin="2 0" />
+										<TextBlock Text="{Binding LastName}" Margin="2 0" />
+										<TextBlock Text="{Binding Address1}" Margin="2 0" />
+									</StackPanel>
+								</DataTemplate>
+
+							</telerik:RadComboBox.ItemTemplate>
+						</telerik:RadComboBox>
+
+
+					</telerik:DataFormDataField>
+
+				</StackPanel>
+			</DataTemplate>
+
+
+		</Grid.Resources>
+
+
+		<telerik:RadDocking  x:Name="dockingMain" BorderThickness="0" Margin="10" >
+			<telerik:RadSplitContainer Orientation="Vertical" InitialPosition="DockedLeft" Width="500" >
+				<telerik:RadPaneGroup>
+					<telerik:RadPane Header="Supplier Editor" CanUserClose="False" >
+
+						<telerik:RadDataForm x:Name="myRadDataForm"  telerik:StyleManager.Theme="Windows7" 
+							 Grid.Column="0" FontSize="14"
+							 VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" 
+							 ItemsSource="{Binding Suppliers}"
+							 Header="{Binding SelectedItem, ElementName=RadGridView1, Converter={StaticResource HeaderConverter}}"
+							 AutoGenerateFields="False"  
+							 ReadOnlyTemplate="{StaticResource ReadTemplate}"                                                            
+							 EditTemplate="{StaticResource EditTemplate}"
+							 NewItemTemplate="{StaticResource EditTemplate}"
+							 CommandButtonsVisibility="All" >
+
+							<telerik:EventToCommandBehavior.EventBindings>
+								<telerik:EventBinding Command="{Binding deleteCommand}" EventName="DeletedItem"  CommandParameter="{Binding}"
+									  RaiseOnHandledEvents="True" PassEventArgsToCommand="True" />
+								<telerik:EventBinding Command="{Binding deletingCommand}" EventName="DeletingItem"  CommandParameter="{Binding}"
+									  RaiseOnHandledEvents="True" PassEventArgsToCommand="True"/>
+							</telerik:EventToCommandBehavior.EventBindings>
+
+						</telerik:RadDataForm>
+
+
+					</telerik:RadPane>
+				</telerik:RadPaneGroup>
+			</telerik:RadSplitContainer>
+
+			<telerik:RadDocking.DocumentHost>
+				<telerik:RadSplitContainer Orientation="Vertical" InitialPosition="DockedRight" >
+					<telerik:RadPaneGroup>
+						<telerik:RadPane Header="Supplier History" CanUserClose="False" >
+
+							<StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Column="2"  >
+								<telerik:RadGridView x:Name="RadGridView1" FontSize="14"
+									 GroupRenderMode="Flat" telerik:StyleManager.Theme="Windows7"                          
+							 ClipboardCopyMode="All"
+							 ClipboardPasteMode="Default"
+							 SelectionMode="Extended" 				 
+							 ItemsSource="{Binding Suppliers}"
+							 CanUserFreezeColumns="False"
+							 RowIndicatorVisibility="Collapsed"
+							 AutoGenerateColumns="False"
+							 IsReadOnly="True"
+							 ShowGroupPanel="True"  >
+
+									<telerik:RadGridView.Columns>
+										<telerik:GridViewDataColumn Header="Id"	DataMemberBinding="{Binding Id}" Width="200" IsVisible="False" IsReadOnly="True" />
+										<telerik:GridViewDataColumn Header="Supplier" DataMemberBinding="{Binding SupplierName, Mode=OneWay}" Width="200" />
+										<telerik:GridViewDataColumn Header="Billing Address"	DataMemberBinding="{Binding BillingAddress, Mode=OneWay}" Width="*" />
+										<telerik:GridViewDataColumn Header="Contact" DataMemberBinding="{Binding FullName, Mode=OneWay }" Width="200" />
+
+
+									</telerik:RadGridView.Columns>
+
+								</telerik:RadGridView>
+
+								<telerik:RadDataPager telerik:StyleManager.Theme="Windows8"             
+							  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+							  x:Name="radDataPager1"
+							  PageSize="18" FontSize="12" 
+							  BorderThickness="1,0,1,1"
+							  Source="{Binding Items, ElementName=RadGridView1}"
+							  DisplayMode="All"
+							  AutoEllipsisMode="Both"
+							  NumericButtonCount="10"
+							  IsTotalItemCountFixed="True"  />
+							</StackPanel>
+
+
+						</telerik:RadPane>
+					</telerik:RadPaneGroup>
+				</telerik:RadSplitContainer>
+			</telerik:RadDocking.DocumentHost>
+		</telerik:RadDocking>
+
+		
+		
+
+
+	</Grid>
+</UserControl>
